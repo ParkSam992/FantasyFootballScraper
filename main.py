@@ -1,14 +1,17 @@
 from RefreshSleeperProjections import refresh_sleeper_projections
+from scrapy.crawler import CrawlerProcess
+from scrapy.utils.project import get_project_settings
+from KeepTradeCutScraper import KeepTradeCutSpider
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
+def refresh_ktc_rankings():
+    process = CrawlerProcess(get_project_settings())
+    process.crawl(KeepTradeCutSpider)
+    process.start()
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi("Sam")
 
+    refresh_ktc_rankings()
     refresh_sleeper_projections()
 
 
