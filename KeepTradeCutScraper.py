@@ -1,14 +1,21 @@
 import re
 import json
 import scrapy
+from scrapy.crawler import CrawlerProcess
+from scrapy.utils.project import get_project_settings
 from data.DataQueries import DataQueries
-
+from progressbar import progressbar
 
 class KeepTradeCutSpider(scrapy.Spider):
     name = "KeepTradeCut"
     start_urls = [
         "https://keeptradecut.com/fantasy-rankings",
     ]
+
+    def refresh_ktc_rankings(self):
+        process = CrawlerProcess(get_project_settings())
+        process.crawl(KeepTradeCutSpider)
+        process.start()
 
     def parse(self, response):
         db = DataQueries()
@@ -28,7 +35,7 @@ class KeepTradeCutSpider(scrapy.Spider):
                 players_data = player_data_statement.split('=')[1].strip().rstrip(';')
                 players = json.loads(players_data)
 
-                for player in players:
+                for player in progressbar(players):
                     player_name = player["playerName"].split(' ')
 
                     db.insert_ktc_data(player['playerID'], player_name[0].replace('\'', ''), player_name[1], player['position'],

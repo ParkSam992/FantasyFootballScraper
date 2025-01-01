@@ -34,3 +34,24 @@ CREATE TABLE "SleeperRankings" (
 );
 
 CREATE INDEX "SleeperRanking_IND1" ON "SleeperRankings" ("FirstName", "LastName");
+
+
+CREATE TABLE "DynastyDaddyMarketRankings" (
+    "NameId" varchar(50) not null,
+    "Market" varchar(50) not null,
+    "OverallRank" integer,
+    "SFOverallRank" integer,
+    "Resource" json,
+    "UpdatedAt" timestamp,
+    CONSTRAINT "DynastyDaddyMarketRankings_PK" primary key ("NameId", "Market")
+);
+
+CREATE TABLE "DynastyDaddyPlayerData" (
+    "NameId"        varchar(50) not null primary key,
+    "SleeperId"     varchar(50) not null,
+    "FirstName"          varchar(50),
+    "LastName"           varchar(50),
+    "Position"           varchar(10),
+    "Resource"  json,
+    "UpdatedAt" timestamp
+);
