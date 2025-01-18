@@ -57,3 +57,24 @@ class DataQueries(DataAccess):
                     '{position}', '{player}', '{datetime.now(timezone.utc)}');
         '''
         self.run_sql(query)
+
+    def clear_fantasy_calc_data(self):
+        query = 'DELETE FROM "FantasyCalcMarketRankings";'
+        self.run_sql(query)
+
+
+    def insert_fantasy_calc_data(self, sleeper_id, is_dynasty, overall_rank, overall_adp,
+                                 sf_overall_rank, sf_overall_adp, resource):
+        def format_value(value):
+            if value is None:
+                return "NULL"
+            return value
+
+        query = f'''
+            INSERT INTO "FantasyCalcMarketRankings" ("SleeperId", "IsDynasty", "OverallRank", 
+                                         "OverallADP", "SFOverallRank", "SFOverallADP", 
+                                         "Resource", "UpdatedAt") 
+            VALUES ('{sleeper_id}', '{is_dynasty}', {overall_rank}, {format_value(overall_adp)}, {sf_overall_rank},
+                    {format_value(sf_overall_adp)}, '{resource}', '{datetime.now(timezone.utc)}');
+        '''
+        self.run_sql(query)

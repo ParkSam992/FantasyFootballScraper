@@ -55,3 +55,13 @@ CREATE TABLE "DynastyDaddyPlayerData" (
     "Resource"  json,
     "UpdatedAt" timestamp
 );
+
+CREATE TABLE "FantasyCalcMarketRankings" (
+    "SleeperId" varchar(50) not null,
+    "IsDynasty" bool not null,
+    "Resource"  json,
+    "UpdatedAt" timestamp,
+    CONSTRAINT "FantasyCalcMarketRankings_PK" primary key ("SleeperId", "IsDynasty")
+);
+
+CREATE INDEX "FantasyCalcMarketRankings_IND1" ON "FantasyCalcMarketRankings" ("IsDynasty");
