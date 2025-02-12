@@ -14,6 +14,7 @@ if __name__ == '__main__':
     refresh_dynasty_daddy_projections()
     refresh_fantasy_calc_projections()
 
+    # Add Dynasty Data Lab
 
     # TODO: Any more data to get? ESPN, Yahoo, Underdog, High stakes money leagues (idk much about these)
     # ESPN and Yahoo seem to not have superflex rankings
