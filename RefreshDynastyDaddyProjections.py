@@ -26,7 +26,6 @@ def refresh_dynasty_daddy_projections():
 def insert_dynasty_daddy_player_data(db, player):
     sleeper_id = player['sleeper_id']
     if sleeper_id is None:
-        print("TESTING")
         sleeper_id = player['name_id']
     db.insert_dynasty_daddy_player_data(player['name_id'], sleeper_id , player['first_name'].replace('\'', ''),
                                         player['last_name'].replace('\'', ''), player['position'], json.dumps(player).replace('\'', ''))
