@@ -17,7 +17,3 @@ def refresh_sleeper_projections():
         db.insert_sleeper_data(player['player_id'], player['player']['first_name'].replace('\'', ''),
                                player['player']['last_name'].replace('\'', ''), player['player']['position'],
                                player['stats'], json.dumps(player).replace('\'', ''))
-
-
-
-
